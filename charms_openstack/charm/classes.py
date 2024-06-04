@@ -225,6 +225,8 @@ class OpenStackCharm(BaseOpenStackCharm,
         """Helper to enable pause/resume action to be processed."""
         actions = {
             'pause': os_utils.pause_unit,
+            'resume': os_utils.resume_unit}
+        _services, _ = ch_cluster.get_managed_services_and_ports(
             self.full_service_list,
             [])
         actions[action](self.assess_status, services=_services)
