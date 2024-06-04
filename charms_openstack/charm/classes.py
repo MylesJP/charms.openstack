@@ -225,8 +225,6 @@ class OpenStackCharm(BaseOpenStackCharm,
         """Helper to enable pause/resume action to be processed."""
         actions = {
             'pause': os_utils.pause_unit,
-            'resume': os_utils.resume_unit}
-        _services, _ = ch_cluster.get_managed_services_and_ports(
             self.full_service_list,
             [])
         actions[action](self.assess_status, services=_services)
@@ -273,7 +271,7 @@ class OpenStackCharm(BaseOpenStackCharm,
             if audit_middleware:
                 hookenv.log("******enable_audit_middleware() called******",
                             level=hookenv.INFO)
-                return context.KeystoneAuditMiddleware(service)
+                context.KeystoneAuditMiddleware(service)
         except Exception:
             hookenv.log('Charm does not support audit-middleware configuration\
                         option', level=hookenv.DEBUG)
