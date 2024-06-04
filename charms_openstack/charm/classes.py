@@ -14,6 +14,7 @@ import charmhelpers.contrib.openstack.ha as os_ha
 import charmhelpers.contrib.openstack.ha.utils as os_ha_utils
 import charmhelpers.contrib.openstack.cert_utils as cert_utils
 import charmhelpers.contrib.openstack.ip as ch_os_ip
+import charmhelpers.contrib.openstack.context as context
 import charmhelpers.core.hookenv as hookenv
 import charmhelpers.core.host as ch_host
 import charmhelpers.fetch as fetch
@@ -265,6 +266,16 @@ class OpenStackCharm(BaseOpenStackCharm,
         Use the pause and resume methods for end user facing activities.
         """
         os_utils.manage_payload_services('resume', self.full_service_list)
+
+    def enable_audit_middleware(self, service=str):
+        try:
+            audit_middleware = self.get_config('audit-middleware')
+            if audit_middleware:
+                hookenv.log("***Hello from charm/classes.py!***")
+                context.KeystoneAuditMiddleware(service)
+        except Exception:
+            hookenv.log('Charm does not support audit-middleware configuration\
+                        option', level=hookenv.DEBUG)
 
     def disable_services(self):
         """Disable services
