@@ -271,7 +271,8 @@ class OpenStackCharm(BaseOpenStackCharm,
         try:
             audit_middleware = self.get_config('audit-middleware')
             if audit_middleware:
-                hookenv.log("***Hello from charm/classes.py!***")
+                hookenv.log("******enable_audit_middleware()******",
+                            level=hookenv.INFO)
                 context.KeystoneAuditMiddleware(service)
         except Exception:
             hookenv.log('Charm does not support audit-middleware configuration\
