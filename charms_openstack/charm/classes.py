@@ -267,7 +267,7 @@ class OpenStackCharm(BaseOpenStackCharm,
         """
         os_utils.manage_payload_services('resume', self.full_service_list)
 
-    def enable_audit_middleware(self, service=str):
+    def enable_audit_middleware(self, service: str):
         hookenv.log("******enable_audit_middleware() called******",
                     level=hookenv.INFO)
         try:
