@@ -268,11 +268,11 @@ class OpenStackCharm(BaseOpenStackCharm,
         os_utils.manage_payload_services('resume', self.full_service_list)
 
     def enable_audit_middleware(self, service=str):
+        hookenv.log("******enable_audit_middleware() called******",
+                    level=hookenv.INFO)
         try:
             audit_middleware = self.get_config('audit-middleware')
             if audit_middleware:
-                hookenv.log("******enable_audit_middleware() called******",
-                            level=hookenv.INFO)
                 context.KeystoneAuditMiddleware(service)
         except Exception:
             hookenv.log('Charm does not support audit-middleware configuration\
